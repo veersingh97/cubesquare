@@ -1,0 +1,1 @@
+export { KYCStatusBanner } from "./KYCStatusBanner";

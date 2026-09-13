@@ -1,75 +1,92 @@
-# React + TypeScript + Vite
+# CubeSquare — Property Listing
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A responsive property listing experience built as part of the MeridianSquare Frontend Developer Stage 2 assessment.
 
-Currently, two official plugins are available:
+## Tech Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+* React
+* TypeScript
+* Vite
+* Bootstrap 5
+* Sass
+* TanStack Query
 
-## React Compiler
+## Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+* Reusable, typed `PropertyCard` component
+* Responsive Bootstrap grid
 
-## Expanding the ESLint configuration
+  * 3 columns on desktop
+  * 2 columns on tablet
+  * 1 column on mobile
+* Minimum yield percentage filter
+* Location filter
+* Property availability indicator
+* Low-availability indication when less than 20% of tokens remain
+* KYC status banner for pending and rejected states
+* Explicit loading, error, and empty states
+* Bootstrap Sass theme configuration
+* Mock property API without a backend
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Project Structure
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
+```text
+src/
+├── api/
+│   └── properties.ts
+├── components/
+│   ├── KYCStatusBanner/
+│   └── PropertyCard/
+├── pages/
+│   └── PropertyListingPage/
+├── styles/
+│   ├── _variables.scss
+│   └── main.scss
+├── types/
+│   └── property.ts
+├── App.tsx
+└── main.tsx
 ```
 
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
+## Getting Started
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### Prerequisites
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+* Node.js 18+
+* npm
 
+### Installation
+
+Clone the repository and install dependencies:
+
+```bash
+npm install
 ```
+
+### Run locally
+
+```bash
+npm run dev
+```
+
+The application will be available at the local Vite development URL shown in the terminal.
+
+### Production build
+
+```bash
+npm run build
+```
+
+## Theme Governance
+
+Bootstrap is the primary styling system. Theme-level Sass variables are configured centrally for values such as the primary colour, border radius, and font family.
+
+Components use Bootstrap utilities and contextual classes rather than duplicating theme values through local CSS.
+
+See `docs/css-governance.md` for the CSS governance approach and white-label theming strategy.
+
+## Data
+
+The application uses the mock property data provided in the assessment. No backend service is required.
+
+TanStack Query is used for the property data-fetching layer so that the data-access pattern can be extended to a real API without coupling the UI components to the request implementation.
